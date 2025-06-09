@@ -28,14 +28,6 @@ refs.allCategories.addEventListener("click", handleCategoryClick);
 async function handleCategoryClick(event) {
     const btn = event.target.closest(".categories__btn");
     if (!btn) return;
-    if (btn.textContent.trim() === "All") {
-        const products = await fetchProducts();
-        markupProducts(products);
-    } else {
-        const category = btn.textContent.trim();
-        const products = await fetchProductsByCategory(category);
-        markupProducts(products);
-    }
     const category = btn.textContent.trim();
   
     // Знімаємо стару активну кнопку
