@@ -1,0 +1,10 @@
+import"./assets/styles-BK7AYJoX.js";import{a as c}from"./assets/vendor-N5iQpiFS.js";c.defaults.baseURL="https://dummyjson.com";async function u(){const e=await c.get("/products/category-list");return console.log(e.data),e.data}async function n(){const t=await c.get("https://dummyjson.com/products?limit=12&skip=0");return console.log(t.data.products),t.data.products}async function d(e){const s=await c.get(`/products/category/${e}`);return console.log(s.data.products),s.data.products}const o={allCategories:document.querySelector(".categories"),allProducts:document.querySelector(".products"),notFound:document.querySelector(".not-found")};function g(e){o.allCategories.innerHTML="";const s=e.map(t=>`<li class="categories__item">
+        <button class="categories__btn" type="button">${t}</button>
+      </li>`).join("");o.allCategories.innerHTML=s}function i(e){o.allProducts.innerHTML="";const s=e.map(t=>`<li class="products__item" data-id="${t.id}">
+        <img class="products__image" src="${t.thumbnail}" alt="${t.title}"/>
+        <p class="products__title">${t.title}</p>
+        <p class="products__brand"><span class="products__brand--bold">Brand:</span> ${t.brand}</p>
+        <p class="products__category">Category: ${t.category}</p>
+        <p class="products__price">Price: $${t.price}</p>
+      </li>`).join("");o.allProducts.innerHTML=s}async function p(){const s=["All",...await u()];g(s)}p();async function m(){const e=await n();i(e)}m();o.allCategories.addEventListener("click",_);async function _(e){const s=e.target.closest(".categories__btn");if(!s)return;const t=s.textContent.trim(),r=o.allCategories.querySelector(".categories__btn--active");r&&r.classList.remove("categories__btn--active"),s.classList.add("categories__btn--active");let a=[];try{t==="All"?a=await n():a=await d(t),a.length?(o.notFound.classList.remove("not-found--visible"),i(a)):(o.notFound.classList.add("not-found--visible"),o.allProducts.innerHTML="")}catch(l){console.error("😿 Не вдалося отримати продукти:",l)}}
+//# sourceMappingURL=index.js.map
